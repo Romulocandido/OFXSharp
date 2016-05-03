@@ -18,8 +18,12 @@ namespace OFXSharp
         public SignOn(XmlNode node)
         {
             StatusCode = Convert.ToInt32(node.GetValue("//CODE"));
+
+            DateTime dt;
+            if (DateTime.TryParse(node.GetValue("//DTSERVER"), out dt))
+                DTServer = dt;
+
             StatusSeverity = node.GetValue("//SEVERITY");
-            DTServer = node.GetValue("//DTSERVER").ToDate();
             Language = node.GetValue("//LANGUAGE");
             IntuBid = node.GetValue("//INTU.BID");
         }
